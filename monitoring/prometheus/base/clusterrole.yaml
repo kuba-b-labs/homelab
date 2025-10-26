@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: target-scraping
+rules:
+- apiGroups: [""] # "" indicates the core API group (for Endpoints, Services, Namespaces)
+  resources: ["endpoints", "endpointslices", "namespaces", "services"]
+  verbs: ["get", "list", "watch"] # Need these verbs to read all resources
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: allow-target-scraping
+roleRef:
+  kind: ClusterRole                     # Refers to a ClusterRole (not a namespace-scoped Role)
+  name: target-scraping             # Name of the ClusterRole this binding gives access to
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount                 # This grants access to a service account
+  name: prometheus                     # Name of the service account (case-sensitive)
+  namespace: prometheus                # Namespace the service account belongs to — REQUIRED
+  apiGroup: ""                         

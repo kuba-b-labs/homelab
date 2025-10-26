@@ -1,0 +1,17 @@
+# https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dynamic-scraping-targets
+  namespace: prometheus
+  labels:
+    app: dynamic-scraping-targets
+spec:
+  storageClassName: local-path 
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+

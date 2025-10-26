@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+  namespace: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      serviceAccountName: prometheus
+      containers:
+      - image: prom/prometheus:main
+        name: prometheus
+        ports:
+          - containerPort: 9090
+        volumeMounts:
+          - name: config
+            mountPath: /etc/prometheus
+          - name: dynamic-scraping-targets
+            mountPath: /etc/prometheus/targets
+          - name: alert-rules
+            mountPath: /etc/prometheus/rules
+      - name: scraping-targets-sidecar
+        image: malydinozaurpl/custom-script
+#        command: ["/bin/sh"]
+#        args: ["-c", "tail -f /dev/null"] # for testing, container always runs
+        command: ["python"]
+        args: ["/targets/main.py"]
+        volumeMounts:
+          - name: dynamic-scraping-targets
+            mountPath: /etc/prometheus/targets
+# SIDECAR PROBES
+        livenessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - 'ps -ef | grep python | grep -v grep' # Check if Python script process is running
+          initialDelaySeconds: 60
+          periodSeconds: 15
+        readinessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - 'test -s /etc/prometheus/targets/target.json' # Check if file exists AND is non-empty
+          initialDelaySeconds: 60 
+          periodSeconds: 15
+
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-config
+#        - name: scraping-targets
+#          configMap:
+#            name: scraping-targets
+        - name: dynamic-scraping-targets
+          persistentVolumeClaim:
+            claimName: dynamic-scraping-targets
+        - name: alert-rules
+          configMap:
+            name: alert-rules

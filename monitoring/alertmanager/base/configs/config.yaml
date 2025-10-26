@@ -1,0 +1,20 @@
+        global:
+          resolve_timeout: 5m
+        route:
+          receiver: 'discord-notifications'
+          group_by: ['alertname']
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 5m
+        receivers:
+          - name: "null"
+          - name: 'discord-notifications'
+            discord_configs:
+  # this is needed because its discord and it needs specific
+  # content options for a message
+  # webhook_url can be retrieved from secret
+#              - webhook_url: '${DISCORD_WEBHOOK_URL}'
+#                send_resolved: true
+              - webhook_url: https://discord.com/api/webhooks/1398393301958135848/pVgLHSciyGhzXnfV4P131YOmpsswcyiCR4AYnjlJINA1GLqGdl09R28ZGCZW8fd2U7jl
+                send_resolved: 
+

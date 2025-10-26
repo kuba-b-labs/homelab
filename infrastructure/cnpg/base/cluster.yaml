@@ -1,0 +1,34 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql
+  labels:
+    db: postgres
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  # Persistent storage configuration
+  storage:
+    # storageClass: csi-hostpath-sc
+    size: 1Gi
+#  enableSuperuserAccess: true
+#  superuserSecret:
+#    name: cnpg-superuser
+#  bootstrap:
+#    initdb:
+#      secret:
+#        name: postgresql-app1
+#      database: app
+#      owner: appuser
+
+# Backup properties
+  backup:
+    barmanObjectStore:
+      destinationPath: https://postgresqldbjb104.blob.core.windows.net/postgres
+   #remember you need new container for new backups, cant reuse one
+      azureCredentials:
+        connectionString:
+          name: storage-creds
+          key: connection_string
+      wal:
+        compression: gzip

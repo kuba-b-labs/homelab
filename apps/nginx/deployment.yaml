@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 8080
+        - name: nginx-exporter
+          image: nginx/nginx-prometheus-exporter:1.5.0
+          args:
+            - "--nginx.scrape-uri=http://127.0.0.1:8080/stub_status"
+            - "--web.listen-address=:9100"
+          ports:
+            - containerPort: 9100

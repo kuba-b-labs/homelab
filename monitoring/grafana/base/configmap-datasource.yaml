@@ -1,0 +1,16 @@
+# https://kubernetes.io/docs/concepts/configuration/configmap/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data-sources
+data:
+  prometheus-datasources.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus.monitoring.svc.cluster.local:9090
+        isDefault: true
+---
+

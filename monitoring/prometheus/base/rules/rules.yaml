@@ -1,0 +1,30 @@
+groups:
+- name: memory_alerts
+  rules:
+  - alert: MemoryOverload
+    expr: |
+      ( node_memory_Active_bytes 
+      / node_memory_MemTotal_bytes * 100) >= 70
+    for: 1m  # Sprawdź, czy warunek utrzymuje się przez 1 minute
+    labels:
+      severity: warning
+    annotations:
+      summary: "Memory for {{ $labels.service_name }} in {{ $labels.namespace }} is over 50%"
+      description: "Node {{ $labels.instance }} has {{ $value }}% memory usage"
+  - alert: InstanceDown
+    expr: up{job="targets-based-on-file"} == 0
+    for: 10m
+    # Use the dynamic labels set by Python script for grouping and summary
+    labels:
+      severity: critical
+    annotations:
+      summary: "Instance {{ $labels.service_name }} in namespace {{ $labels.namespace }} is down"
+      description: "{{ $labels.service_name }} is unavailable."
+  - alert: DatabasePodDown
+    expr: up{namespace='postgresql',service_name='postgresql_rw'} == 0
+    for: 10m
+    labels:
+        severity: critical
+    annotations:
+        summary: "Database {{ $labels.pod_name }} in namespace {{ $labels.namespace }} is down"
+        description: "{{ $labels.service_name }} service is unavailable"  

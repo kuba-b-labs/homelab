@@ -1,0 +1,40 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager
+  labels:
+    app: alertmanager
+spec:
+  selector:
+    matchLabels:
+      app: alertmanager
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: alertmanager
+    spec:
+      containers:
+      - name: alertmanager
+        image: prom/alertmanager
+        imagePullPolicy: IfNotPresent 
+        ports:
+        - containerPort: 9093
+          name: myjob
+        args:
+        - --config.file=/etc/alertmanager/config.yaml
+ #       - --config.expand-env=true
+ #       envFrom:
+ #         - secretRef:
+ #             name: discord-webhook-url
+        volumeMounts:
+          - name: config
+            mountPath: /etc/alertmanager/
+            readOnly: true
+      volumes:
+        - name: config
+          secret:
+            secretName: alertmanager-config 

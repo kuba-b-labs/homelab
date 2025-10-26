@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dev-appset-helm
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+      revision: HEAD
+      directories:
+        - path: charts/*/envs/dev
+  template:
+    metadata:
+      name: '{{index .path.segments 1}}-{{index .path.segments 3}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+        targetRevision: HEAD
+        path: '{{ printf "charts/%s/base" (index .path.segments 1) }}'
+        helm:
+          releaseName: '{{index .path.segments 1}}'
+          valueFiles:
+          - 'values.yaml'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{index .path.segments 1}}-{{index .path.segments 3}}'
+      syncPolicy:
+          automated:
+            prune: true
+          syncOptions:
+            - CreateNamespace=true
+

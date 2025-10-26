@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: prometheus
+
+resources:
+  - ./namespace.yaml
+  - ./configmap.yaml
+  - ./daemonset.yaml
+  - ./deployment.yaml
+  - ./prometheus-service.yaml
+  - ./rolebinding.yaml
+  - ./roledefinition.yaml
+  - ./service.yaml
+  - ./serviceaccount.yaml
+  - ./clusterrole.yaml
+  - ./pvc.yaml
+configMapGenerator:
+#  - name: scraping-targets
+#    files:
+#      - targets/targets.json
+  - name: alert-rules
+    files:
+      - rules/rules.yaml

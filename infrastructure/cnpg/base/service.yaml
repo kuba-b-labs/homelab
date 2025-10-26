@@ -1,0 +1,16 @@
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-exporter
+spec:
+  selector:
+    app: postgresql-exporter
+  type: ClusterIP
+  ports:
+  - name: metrics
+    protocol: TCP 
+    port: 9187
+    targetPort: 9187
+---
+

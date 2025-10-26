@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dev-appset-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+      revision: HEAD
+      directories:
+        - path: apps/*/envs/dev
+        - path: infrastructure/*/envs/dev
+        - path: monitoring/*/envs/dev
+  template:
+    metadata:
+      name: '{{index .path.segments 1}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: '{{ if (contains (index .path.segments 1) "external-secrets") }}1{{ else }}2{{ end }}'
+    spec:
+      project: default 
+      source:
+       repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+       targetRevision: HEAD
+       path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

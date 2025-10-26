@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: prometheus
+  name: prometheus-scraper
+rules:
+- apiGroups: [""] # group of resources this rule applies
+  resources: ["pods"] # kubernetes resource types this rule allows access to
+  verbs: ["get", "watch", "list"] 

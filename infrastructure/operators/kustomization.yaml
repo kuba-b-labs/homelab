@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ./namespaces.yaml
+
+helmCharts:
+  - name: external-secrets
+    releaseName: exsecrets-operator
+    repo: https://charts.external-secrets.io
+    version: 0.20.3
+    namespace: exsecrets-operator
+
+  - name: cloudnative-pg
+    releaseName: cnpg-operator
+    repo: https://cloudnative-pg.github.io/charts
+    namespace: cnpg-operator
+
+
