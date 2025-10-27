@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD
+    repoURL: https://github.com/kuba-b-labs/homelab
     targetRevision: HEAD
     path: infrastructure/operators
   destination:

@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+      repoURL: https://github.com/kuba-b-labs/homelab.git
       revision: HEAD
       directories:
         - path: charts/*/envs/dev
@@ -18,7 +18,7 @@ spec:
     spec:
       project: "default"
       source:
-        repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+        repoURL: https://github.com/kuba-b-labs/homelab.git
         targetRevision: HEAD
         path: '{{ printf "charts/%s/base" (index .path.segments 1) }}'
         helm:
