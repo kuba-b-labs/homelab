@@ -8,10 +8,10 @@ resources:
 - secret.yaml
 - namespace.yaml
 
-#configMapGenerator:
-#- name: alertmanager-config
-#  files:
-#    - configs/config.yaml
+configMapGenerator:
+- name: alertmanager-config
+  files:
+    - configs/config.yaml
 
 # secretGenerator:
 #    - name: alertmanager-config

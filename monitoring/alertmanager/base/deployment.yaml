@@ -1,4 +1,3 @@
-# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,10 +5,10 @@ metadata:
   labels:
     app: alertmanager
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: alertmanager
-  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -17,24 +16,38 @@ spec:
       labels:
         app: alertmanager
     spec:
+      initContainers:
+      - name: init-config
+        image: busybox
+        command:
+          - sh
+          - -c
+          - |
+            cat /etc/alertmanager/config.yaml | sed "s|DISCORD_WEBHOOK_URL|$(cat /secret/discord_webhook_url) |g" > /tmp/config/config.yaml 
+        volumeMounts:
+          - name: config-template
+            mountPath: /etc/alertmanager/
+          - name: config
+            mountPath: /tmp/config
+          - name: discord-webhook-url
+            mountPath: /secret
       containers:
       - name: alertmanager
         image: prom/alertmanager
-        imagePullPolicy: IfNotPresent 
+        imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 9093
-          name: myjob
+          - containerPort: 9093
         args:
-        - --config.file=/etc/alertmanager/config.yaml
- #       - --config.expand-env=true
- #       envFrom:
- #         - secretRef:
- #             name: discord-webhook-url
+          - --config.file=/tmp/config/config.yaml
         volumeMounts:
           - name: config
-            mountPath: /etc/alertmanager/
-            readOnly: true
+            mountPath: /tmp/config
       volumes:
+        - name: config-template
+          configMap:
+            name: alertmanager-config
         - name: config
+          emptyDir: {}
+        - name: discord-webhook-url
           secret:
-            secretName: alertmanager-config 
+            secretName: discord-webhook-url
