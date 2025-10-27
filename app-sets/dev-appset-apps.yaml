@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+      repoURL: https://github.com/kuba-b-labs/homelab
       revision: HEAD
       directories:
         - path: apps/*/envs/dev
@@ -22,7 +22,7 @@ spec:
     spec:
       project: default 
       source:
-       repoURL: https://github.com/kuba-b-labs/homelab-with-argoCD.git
+       repoURL: https://github.com/kuba-b-labs/homelab
        targetRevision: HEAD
        path: '{{.path.path}}'
       destination:
