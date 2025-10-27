@@ -10,11 +10,11 @@ spec:
     name: azure-kv-store
 
   target:
-    name: GITHUB_TOKEN #name of a secret in k8s
+    name: renovate-token #name of a secret in k8s
     creationPolicy: Owner #Owner, Merge, None
     #deletionPolicy: Retain, Delete
   #map secrets from azure keyvault to kubernetes secrets
   data:
-    - secretKey: renovate-token # key name of k8s secret
+    - secretKey: GITHUB_TOKEN # key name of k8s secret
       remoteRef:
         key: renovate-token
