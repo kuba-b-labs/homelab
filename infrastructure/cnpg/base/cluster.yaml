@@ -5,7 +5,7 @@ metadata:
   labels:
     db: postgres
 spec:
-  instances: 3
+  instances: 2
   primaryUpdateStrategy: unsupervised
   # Persistent storage configuration
   storage:
@@ -14,8 +14,10 @@ spec:
 #  enableSuperuserAccess: true
 #  superuserSecret:
 #    name: cnpg-superuser
-#  bootstrap:
-#    initdb:
+  bootstrap:
+    initdb:
+      database: linkding
+      owner: app
 #      secret:
 #        name: postgresql-app1
 #      database: app
