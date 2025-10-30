@@ -16,7 +16,3 @@ spec:
               number: 80
         path: /
         pathType: Prefix
-  #tls:
-  #- hosts:
-  # - linkding.test104.pl
-  # secretName: grafana-tls

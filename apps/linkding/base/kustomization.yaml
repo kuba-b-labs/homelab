@@ -5,4 +5,5 @@ resources:
 - ./linkding.yaml
 - ./linkding_deployment.yaml
 - ./linkding_service.yaml
-- ./linkding_volume_claim.yaml
+# - ./linkding_volume_claim.yaml
+- ./linkding_secrets.yaml

@@ -20,15 +20,13 @@ spec:
         image: sissbruecker/linkding
         ports:
         - containerPort: 9090
-        env:
-         - name: LD_SUPERUSER_NAME
-           value: "test_user"
-         - name: LD_SUPERUSER_PASSWORD
-           value: "123456"
-        volumeMounts:
-          - mountPath: "/etc/linkding/data"
-            name: linkding-volume
-      volumes:
-        - name: linkding-volume
-          persistentVolumeClaim:
-            claimName: linkding-claim
+        envFrom:
+          - secretRef:
+              name: linkding-envs
+      #   volumeMounts:
+      #     - mountPath: "/etc/linkding/data"
+      #       name: linkding-volume
+      # volumes:
+      #   - name: linkding-volume
+      #     persistentVolumeClaim:
+      #       claimName: linkding-claim
