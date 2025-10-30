@@ -26,6 +26,8 @@ spec:
         env:
         - name: LD_DB_HOST
           value: "postgresql-rw.postgres-db.svc.cluster.local"
+        - name: LD_DB_ENGINE
+          value: postgres
 
       #   volumeMounts:
       #     - mountPath: "/etc/linkding/data"
