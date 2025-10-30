@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+  name: linkding
+spec:
+  ingressClassName: traefik #class name of your ingress controller
+  rules:
+  - host: linkding.test104.pl
+    http:
+      paths:
+      - backend:
+          service:
+            name: linkding
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  #tls:
+  #- hosts:
+  # - linkding.test104.pl
+  # secretName: grafana-tls
