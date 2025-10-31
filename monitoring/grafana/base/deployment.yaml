@@ -30,6 +30,9 @@ spec:
           # Powiedz Grafanie, żeby szukała dashboardów w /var/lib/grafana/dashboards
          - name: GF_PATHS_PROVISIONING
            value: /etc/grafana/provisioning
+        envFrom:
+         - secretRef:
+           name: grafana-credentials
         volumeMounts:
         - name: dashboard-test
           mountPath: /var/lib/grafana/dashboards

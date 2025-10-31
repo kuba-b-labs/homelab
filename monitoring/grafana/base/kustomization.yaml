@@ -8,6 +8,7 @@ resources:
   - ./configmap-provisioning.yaml
   - ./namespace.yaml
   - ./service.yaml
+  - ./grafana-secrets.yaml
 
 configMapGenerator:
   - name: basic-dashboard
