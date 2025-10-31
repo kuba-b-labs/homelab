@@ -15,6 +15,10 @@ spec:
       labels:
         app: linkding
     spec:
+      securityContext:
+        runAsUser: 82
+        runAsGroup: 82
+        fsGroup: 82
       containers:
       - name: linkding
         image: sissbruecker/linkding
