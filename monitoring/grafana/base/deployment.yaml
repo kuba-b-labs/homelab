@@ -31,8 +31,8 @@ spec:
          - name: GF_PATHS_PROVISIONING
            value: /etc/grafana/provisioning
         envFrom:
-         - secretRef:
-           name: grafana-credentials
+        - secretRef:
+          name: grafana-credentials
         volumeMounts:
         - name: dashboard-test
           mountPath: /var/lib/grafana/dashboards
