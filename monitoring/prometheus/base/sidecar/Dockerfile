@@ -7,4 +7,6 @@ WORKDIR /dynamic-targets
 
 RUN pip install kubernetes
 
+USER 65534
+
 CMD ["python","main.py"]

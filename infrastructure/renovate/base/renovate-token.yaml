@@ -15,6 +15,6 @@ spec:
     #deletionPolicy: Retain, Delete
   #map secrets from azure keyvault to kubernetes secrets
   data:
-    - secretKey: RENOVATE_GITHUB_TOKEN # key name of k8s secret
+    - secretKey: GITHUB_TOKEN # key name of k8s secret
       remoteRef:
         key: renovate-token
