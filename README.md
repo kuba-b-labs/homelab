@@ -16,6 +16,7 @@
 ## Overview
 
 A GitOps-based Kubernetes homelab infrastructure managed by ArgoCD on 2 nodes. This repository contains the declarative configuration for applications, monitoring, database infrastructure, and external secret management across multiple environments.
+Additionally backups for databases are stored in Azure Storage Accounts and secrets are pulled from Azure Key Vault.
 
 ## Architecture
 
