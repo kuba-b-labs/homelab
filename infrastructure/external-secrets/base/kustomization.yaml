@@ -5,4 +5,5 @@ resources:
 #- ./az-service-principal.yaml
 - ./cluster-secret-store.yaml
 - ./namespace.yaml
+- ./serviceaccount.yaml
 
