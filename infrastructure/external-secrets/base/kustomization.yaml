@@ -5,5 +5,10 @@ resources:
 #- ./az-service-principal.yaml
 - ./cluster-secret-store.yaml
 - ./namespace.yaml
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: exsecrets-operator
+resources:
 - ./serviceaccount.yaml
 
