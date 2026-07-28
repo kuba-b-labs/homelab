@@ -46,7 +46,7 @@ spec:
   # Backup properties
   backup:
     barmanObjectStore:
-      destinationPath: "https://backupjb104k8s.blob.core.windows.net/database"
+      destinationPath: "https://cnpgbackupjb.blob.core.windows.net/database"
       #remember you need new container for new backups, cant reuse one
       azureCredentials:
         connectionString:
