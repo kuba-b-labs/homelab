@@ -8,3 +8,15 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: exsecrets-operator
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eso-identity
+  namespace: exsecrets-operator
+  annotations:
+    azure.workload.identity/client-id: "67cdee93-c5ed-4eaf-aea2-d15416a0791b"
+  labels:
+    azure.workload.identity/use: "true"
