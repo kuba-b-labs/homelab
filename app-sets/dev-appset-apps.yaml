@@ -11,8 +11,8 @@ spec:
       repoURL: https://github.com/kuba-b-labs/homelab
       revision: HEAD
       directories:
-        - path: apps/*/envs/dev
-        - path: infrastructure/*/envs/dev
+        # - path: apps/*/envs/dev
+        # - path: infrastructure/*/envs/dev
         - path: monitoring/*/envs/dev
   template:
     metadata:
