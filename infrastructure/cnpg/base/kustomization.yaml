@@ -9,4 +9,4 @@ resources:
 - ./cluster.yaml
 - ./postgres-exporter.yaml
 - ./service.yaml
-- ./serviceaccount.yaml
+
