@@ -40,6 +40,6 @@ spec:
   serviceAccountTemplate:
     metadata:
       annotations:
-        azure.workload.identity/client-id: "5d91183a-6a85-4d43-8c9c-6be969c05c20"
+        azure.workload.identity/client-id: "77e24a32-9243-4d0e-b247-ea078cf3fd6d"
       labels:
         azure.workload.identity/use: "true"
