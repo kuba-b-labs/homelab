@@ -21,6 +21,9 @@ helmCharts:
     repo: oci://quay.io/jetstack/charts
     version: 1.21.1
     namespace: cert-manager
+    valuesInline:
+      crds:
+        enabled: true
 
   - name: plugin-barman-cloud
     releaseName: plugin-barman-cloud
