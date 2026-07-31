@@ -16,4 +16,13 @@ helmCharts:
     repo: https://cloudnative-pg.github.io/charts
     namespace: cnpg-operator
 
+  - name: cert-manager
+    releaseName: cert-manager
+    repo: oci://quay.io/jetstack/charts
+    version: 1.21.1
+    namespace: cert-manager
 
+  - name: plugin-barman-cloud
+    releaseName: plugin-barman-cloud
+    repo: https://cloudnative-pg.github.io/charts
+    namespace: cnpg-operator

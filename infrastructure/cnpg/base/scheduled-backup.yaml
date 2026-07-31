@@ -1,13 +1,12 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
-metadata: 
+metadata:
   name: scheduled-backup
 spec:
-#  immediate: true
-  schedule: '@daily'
   cluster:
-    #db: postgresql
     name: postgresql
-    # must be wrapped in 'name' #reference your cluster you name
-    #in manifest above
-  backupOwnerReference: self 
+  schedule: '@daily'
+  backupOwnerReference: self
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
