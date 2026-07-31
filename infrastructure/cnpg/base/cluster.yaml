@@ -25,12 +25,21 @@ spec:
 
 # Backup properties
   backup:
-    barmanObjectStore:
-      destinationPath: https://cnpgbackupjb.blob.core.windows.net/backup
-   #remember you need new container for new backups, cant reuse one
-      azureCredentials:
-        connectionString:
-          name: storage-creds
-          key: connection_string
-      wal:
-        compression: gzip
+    volumeSnapshot:
+       className: csi-aws-vsc
+
+  plugins:
+  - name: barman-cloud.cloudnative-pg.io
+    isWALArchiver: true
+    parameters:
+      barmanObjectName: "barman-object-store"
+
+  inheritedMetadata:
+    labels:
+      azure.workload.identity/use: "true"
+  serviceAccountTemplate:
+    metadata:
+      annotations:
+        azure.workload.identity/client-id: "5d91183a-6a85-4d43-8c9c-6be969c05c20"
+      labels:
+        azure.workload.identity/use: "true"

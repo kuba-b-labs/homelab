@@ -10,3 +10,7 @@ metadata:
   name: exsecrets-operator
 
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
