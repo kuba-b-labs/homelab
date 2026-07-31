@@ -33,10 +33,10 @@ spec:
         - name: LD_DB_ENGINE
           value: postgres
 
-      #   volumeMounts:
-      #     - mountPath: "/etc/linkding/data"
-      #       name: linkding-volume
-      # volumes:
-      #   - name: linkding-volume
-      #     persistentVolumeClaim:
-      #       claimName: linkding-claim
+        volumeMounts:
+          - mountPath: "/etc/linkding/data"
+            name: linkding-volume
+      volumes:
+        - name: linkding-volume
+          persistentVolumeClaim:
+            claimName: linkding-claim
