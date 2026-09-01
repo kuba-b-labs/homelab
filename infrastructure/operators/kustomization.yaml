@@ -41,14 +41,18 @@ helmCharts:
     releaseName: istiod
     namespace: istio-system
     valuesInline:
-    pilot:
-      env:
-        PILOT_ENABLE_AMBIENT: "true"
+      pilot:
+        env:
+          PILOT_ENABLE_AMBIENT: "true"
 
   - name: cni
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istio-cni
     namespace: istio-system
+    valuesInline:
+      pilot:
+        env:
+          PILOT_ENABLE_AMBIENT: "true"
 
   - name: ztunnel
     repo: https://istio-release.storage.googleapis.com/charts
