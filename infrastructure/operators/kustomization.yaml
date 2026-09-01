@@ -41,10 +41,10 @@ helmCharts:
     releaseName: istiod
     namespace: istio-system
 
-  - name: cni
-    repo: https://istio-release.storage.googleapis.com/charts
-    releaseName: istio-cni
-    namespace: istio-system
+  # - name: cni
+  #   repo: https://istio-release.storage.googleapis.com/charts
+  #   releaseName: istio-cni
+  #   namespace: istio-system
 
   - name: ztunnel
     repo: https://istio-release.storage.googleapis.com/charts
