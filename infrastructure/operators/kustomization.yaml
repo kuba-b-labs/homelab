@@ -43,9 +43,7 @@ helmCharts:
     namespace: istio-system
     version: 1.30.4 
     valuesInline:
-      pilot:
-        env:
-          PILOT_ENABLE_AMBIENT: "true"
+      profile: "ambient"
 
   - name: cni
     repo: https://istio-release.storage.googleapis.com/charts
@@ -53,9 +51,7 @@ helmCharts:
     namespace: istio-system
     version: 1.30.4 
     valuesInline:
-      pilot:
-        env:
-          PILOT_ENABLE_AMBIENT: "true"
+      profile: "ambient"
 
   - name: ztunnel
     repo: https://istio-release.storage.googleapis.com/charts
