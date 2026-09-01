@@ -34,12 +34,14 @@ helmCharts:
   - name: base
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istio-base
+    version: 1.30.4 
     namespace: istio-system
 
   - name: istiod
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istiod
     namespace: istio-system
+    version: 1.30.4 
     valuesInline:
       pilot:
         env:
@@ -49,6 +51,7 @@ helmCharts:
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istio-cni
     namespace: istio-system
+    version: 1.30.4 
     valuesInline:
       pilot:
         env:
@@ -57,4 +60,5 @@ helmCharts:
   - name: ztunnel
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istio
+    version: 1.30.4 
     namespace: istio-system
