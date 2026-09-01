@@ -31,7 +31,7 @@ helmCharts:
     repo: https://cloudnative-pg.github.io/charts
     namespace: cnpg-operator
 
-  - name: istio-base
+  - name: base
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istio-base
     namespace: istio-system
@@ -41,12 +41,12 @@ helmCharts:
     releaseName: istiod
     namespace: istio-system
 
-  - name: istio-cni
+  - name: cni
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istio-cni
     namespace: istio-system
 
-  - name: istio-ztunnel
+  - name: ztunnel
     repo: https://istio-release.storage.googleapis.com/charts
     releaseName: istio
     namespace: istio-system
