@@ -8,9 +8,17 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: exsecrets-operator
-
+  labels:
+    istio.io/dataplane-mode: ambient
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: cert-manager
+  labels:
+    istio.io/dataplane-mode: ambient
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-system

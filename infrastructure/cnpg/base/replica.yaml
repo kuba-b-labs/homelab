@@ -1,0 +1,27 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-example-replica-from-backup-simple
+spec:
+  instances: 1
+  serviceAccountName: eso-identity
+  inheritedMetadata:
+    labels:
+      azure.workload.identity/use: "true"
+  bootstrap:
+    recovery:
+      source: postgresql
+
+  replica:
+    enabled: true
+    source: postgresql
+
+  storage:
+    size: 1Gi
+
+  externalClusters:
+  - name: postgresql
+    barmanObjectStore:
+      destinationPath: "https://cnpgbackupjb.blob.core.windows.net/backup"
+      azureCredentials:
+        inheritFromAzureAD: true

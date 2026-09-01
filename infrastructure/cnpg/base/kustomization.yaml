@@ -9,4 +9,5 @@ resources:
 - ./cluster.yaml
 - ./postgres-exporter.yaml
 - ./service.yaml
-
+- ./rolebinding.yaml
+- ./replica.yaml

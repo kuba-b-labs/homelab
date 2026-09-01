@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin-deployment
+  labels:
+    app: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+      - name: pgadmin
+        image: dpage/pgadmin4:9.8
+
+        ports:
+        - containerPort: 80
+
+        env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: "demo@example.com"
+
+        - name: PGADMIN_DEFAULT_PASSWORD
+          value: "secret"
+
+        - name: PGADMIN_CONFIG_SERVER_MODE
+          value: "False"
+
+        - name: PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED
+          value: "False"
+
+        # plik .pgpass dostarczony przez Secret
+        - name: PGPASS_FILE
+          value: "/tmp/.pgpass"
+
+        volumeMounts:
+
+        # automatyczna konfiguracja serwerów pgAdmin
+        - name: server-config
+          mountPath: /pgadmin4/servers.json
+          subPath: serverFile.json
+
+        # .pgpass tylko do odczytu
+        - name: postgresql-app
+          mountPath: /tmp/.pgpass
+          subPath: pgpass
+          readOnly: true
+
+
+      volumes:
+
+      # servers.json z ConfigMap
+      - name: server-config
+        configMap:
+          name: servers-config
+
+      # sekret wygenerowany przez ExternalSecret
+      - name: postgresql-app
+        secret:
+          secretName: postgresql-app
+          #defaultMode: 0400

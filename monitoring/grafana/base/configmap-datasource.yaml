@@ -4,13 +4,21 @@ kind: ConfigMap
 metadata:
   name: data-sources
 data:
-  prometheus-datasources.yaml: |-
+  datasources.yaml: |-
     apiVersion: 1
     datasources:
       - name: prometheus
         type: prometheus
         access: proxy
-        url: http://prometheus.monitoring.svc.cluster.local:9090
+        url: http://prometheus.prometheus.svc.cluster.local:9090
         isDefault: true
+      - name: loki
+        type: loki
+        access: proxy
+        url: http://loki.loki.svc.cluster.local:3100
+        jsonData:
+          httpHeaderName1: X-Scope-OrgID
+        secureJsonData:
+          httpHeaderValue1: 1
 ---
 

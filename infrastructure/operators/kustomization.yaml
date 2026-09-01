@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - ./namespaces.yaml
+- ./peerauth.yaml
 
 helmCharts:
   - name: external-secrets
@@ -29,3 +30,23 @@ helmCharts:
     releaseName: plugin-barman-cloud
     repo: https://cloudnative-pg.github.io/charts
     namespace: cnpg-operator
+
+  - name: istio-base
+    repo: https://istio-release.storage.googleapis.com/charts
+    releaseName: istio-base
+    namespace: istio-system
+
+  - name: istiod
+    repo: https://istio-release.storage.googleapis.com/charts
+    releaseName: istiod
+    namespace: istio-system
+
+  - name: istio-cni
+    repo: https://istio-release.storage.googleapis.com/charts
+    releaseName: istio-cni
+    namespace: istio-system
+
+  - name: istio-ztunnel
+    repo: https://istio-release.storage.googleapis.com/charts
+    releaseName: istio
+    namespace: istio-system

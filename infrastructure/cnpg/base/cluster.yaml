@@ -7,6 +7,7 @@ metadata:
 spec:
   instances: 2
   primaryUpdateStrategy: unsupervised
+  serviceAccountName: eso-identity
   # Persistent storage configuration
   storage:
     # storageClass: csi-hostpath-sc
@@ -23,6 +24,11 @@ spec:
 #      database: app
 #      owner: appuser
 
+# # Replication
+#   replica:
+#     primary: postgresql
+#     source: dr-example-cluster
+
 # Backup properties
   backup:
     volumeSnapshot:
@@ -37,9 +43,9 @@ spec:
   inheritedMetadata:
     labels:
       azure.workload.identity/use: "true"
-  serviceAccountTemplate:
-    metadata:
-      annotations:
-        azure.workload.identity/client-id: "77e24a32-9243-4d0e-b247-ea078cf3fd6d"
-      labels:
-        azure.workload.identity/use: "true"
+  # serviceAccountTemplate:
+  #   metadata:
+  #     annotations:
+  #       azure.workload.identity/client-id: "77e24a32-9243-4d0e-b247-ea078cf3fd6d"
+  #     labels:
+  #       azure.workload.identity/use: "true"
